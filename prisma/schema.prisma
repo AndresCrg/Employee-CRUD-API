@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Crendential {
+  id       Int    @id @default(autoincrement())
+  email    String @unique @db.VarChar(255)
+  password String @db.VarChar(255)
+
+  @@map("credentials")
+}
+
+model Employee {
+  id                       Int      @id @default(autoincrement())
+  full_name                String   @db.VarChar(70)
+  document_type            TypeDoc
+  document                 String   @unique @db.VarChar(45)
+  department               String   @db.VarChar(45)
+  contract_expiration_date DateTime @db.Date
+  position                 String   @db.VarChar(50)
+  email                    String   @unique @db.VarChar(255)
+  state                    State?   @default(A)
+
+  @@map("employees")
+}
+
+enum TypeDoc {
+  CC
+  CE
+  PA
+  TI
+
+  @@map("typesDoc")
+}
+
+enum State {
+  A
+  B
+  D
+
+  @@map("states")
+}
+
+model Token {
+  id         Int      @id @default(autoincrement())
+  token      String   @db.VarChar(255)
+  expiration DateTime @db.DateTime()
+
+  @@map("tokens")
+}
