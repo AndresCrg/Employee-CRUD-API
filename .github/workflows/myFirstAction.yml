@@ -1,0 +1,13 @@
+name: practica
+
+on:
+ push:
+  branches: [main]
+
+jobs:
+  miPrimerJob:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Mi primera action"
+      - run: date
+   
