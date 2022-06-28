@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerSpec = {
@@ -36,6 +37,7 @@ class Server {
 	}
 
 	middleware() {
+		this.app.unsubscribe(cors());
 		this.app.use(express.json());
 	}
 
